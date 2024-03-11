@@ -1,35 +1,27 @@
-package Networking;
-
 import java.util.*;
 import java.io.*;
 import java.net.*;
 
 public class SocketClient {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Socket socket = null;
-        PrintWriter outputStream = null;
+        String s;
         Scanner inputStream = null;
+        PrintWriter outputStream = null;
         try {
-            socket = new Socket("localhost", 6789);
-            outputStream = new PrintWriter(new DataOutputStream(socket.getOutputStream()));
-            inputStream = new Scanner(new InputStreamReader(socket.getInputStream()));
-            System.out.println("Enter a message: ");
-            String message = scanner.nextLine();
-            outputStream.println(message);
+            Socket clientSocket = new Socket("localhost", 6789);
+            inputStream = new Scanner(new InputStreamReader(clientSocket.getInputStream()));
+            outputStream = new PrintWriter(new DataOutputStream(clientSocket.getOutputStream()));
+            
+            Scanner keyboard = new Scanner(System.in);
+            System.out.println("What is ur name?");
+            String name = keyboard.nextLine();
+            outputStream.println(name);
             outputStream.flush();
-            System.out.println(inputStream.nextLine());
+            s = inputStream.nextLine();
+            System.out.println(s);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        } finally {
-            scanner.close();
-            try {
-                socket.close();
-                inputStream.close();
-                outputStream.close();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
         }
     }
 }

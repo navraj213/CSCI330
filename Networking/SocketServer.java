@@ -1,5 +1,3 @@
-package Networking;
-
 import java.util.*;
 import java.io.*;
 import java.net.*;
@@ -18,7 +16,7 @@ public class SocketServer {
             inputStream = new Scanner(new InputStreamReader(socket.getInputStream()));
             outputStream = new PrintWriter(new DataOutputStream(socket.getOutputStream()));
             s = inputStream.nextLine();
-            System.out.println(s + "has connected!");
+            System.out.println(s + " has connected!");
 
             inputStream.close();
             outputStream.close();
